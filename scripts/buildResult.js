@@ -2,8 +2,9 @@ const { readFileSync, createWriteStream } = require('fs');
 const { resolve, basename } = require('path');
 const JSZip = require('jszip');
 const log = require('./log');
-const getFiles = require('./getFiles');
 const { LANDING_NAME } = require('../config/appConfig');
+const getFiles = require('./getFiles');
+const checkFile = require('./checkFile');
 
 const zip = new JSZip();
 
@@ -14,8 +15,12 @@ let match;
 const getImageFiles = async (filePath) => {
   const files = [];
 
-  for await (const fileName of getFiles(filePath)) {
-    files.push(fileName);
+  const hasFolder = await checkFile(filePath);
+
+  if (hasFolder) {
+    for await (const fileName of getFiles(filePath)) {
+      files.push(fileName);
+    }
   }
 
   return files;

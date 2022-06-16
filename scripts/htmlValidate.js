@@ -39,11 +39,11 @@ getFilesByExtension(resolve(__dirname, '../src'), '.hbs').then((files) => {
 /**
  * Check Stub images
  */
-getFilesByExtension(resolve(__dirname, '../public/common/img/uploaded/products/'), '.png').then((files) => {
-  files.forEach((file) => {
-    if (file.includes('stub.png')) {
-      log(`Please remove stub image: ${file}`);
-      process.exit(1);
-    }
-  });
-});
+// getFilesByExtension(resolve(__dirname, '../public/common/img/uploaded/products/'), '.png').then((files) => {
+//   files.forEach((file) => {
+//     if (file.includes('stub.png')) {
+//       log(`Please remove stub image: ${file}`);
+//       process.exit(1);
+//     }
+//   });
+// });

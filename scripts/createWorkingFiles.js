@@ -8,7 +8,7 @@ const checkFile = require('./checkFile');
 const srcDir = resolve(__dirname, `../src/${LANDING_NAME}`);
 const hbs = resolve(srcDir, 'content.hbs');
 const css = resolve(srcDir, 'content.css');
-const stubImg = resolve(__dirname, `../public/common/img/uploaded/products/${LANDING_NAME}/stub.png`);
+const stubImg = resolve(srcDir, 'images/stub.png');
 
 /**
  *
@@ -59,20 +59,30 @@ const createWorkingFiles = async () => {
       `<div class="${LANDING_NAME}-block">
   <h2>Краткая инструкция по работе с контентом</h2>
   <ul>
+    <li>Картинки можно (но не обязательно) класть в папку <b>src/[НАЗВАНИЕ ЛЕНДИНГА]/images</b></li>
     <li>
-      Для удобства вставки картинок можно использовать handlebars выражение <code>dist</code>.
-      Оно будет заменено на {{dist}}.
-      Но можно писать и полный путь к папке.
+      HTML код пишем в файле <b>src/[НАЗВАНИЕ ЛЕНДИНГА]/content.hbs</b>.
+      Handlebars используется для возможности перезагрузки страницы во время разработки.
+      По сути это html файл, но для любителей hbs можно использовать и его возможности.
     </li>
-    <li>Картинки следует располагать в папку {{dist}}/<b>[НАЗВАНИЕ ЛЕНДИНГА]</b></li>
-    <li>HTML код пишем в файле <b>src/[НАЗВАНИЕ ЛЕНДИНГА]/content.hbs</b></li>
-    <li>CSS код пишем в файле <b>src/[НАЗВАНИЕ ЛЕНДИНГА]/content.css</b></li>
-    <li>Название лендинга задаётся переменной <b>LANDING_NAME</b>, в файле .env</li>
+    <li>
+      CSS код пишем в файле <b>src/[НАЗВАНИЕ ЛЕНДИНГА]/content.css</b>.
+      Если нужна возможность использовать препроцессоры - можно реализовать отдельно.
+    </li>
+    <li>
+      Название лендинга задаётся переменной <b>LANDING_NAME</b>, в файле .env,
+      более подробно о параметрах написано в README.md
+    </li>
+    <li>
+      После финальной сборки обязательно выполнить предпросмотр собранного финального результата.
+      Картинки перекладываются в другую папку и есть ненулевая вероятность некорректного отображения.
+      Такое действие необходимо для удобства загрузки вёрстки на сайт.
+    </li>
   </ul>
   <br>
 
   <h2>Пример картинки:</h2>
-  <img src="{{dist}}/${LANDING_NAME}/stub.png" alt="${LANDING_NAME}">
+  <img src="./src/${LANDING_NAME}/images/stub.png" alt="${LANDING_NAME}">
 
   <h2>Доступные для использования цвета:</h2>
   <div class="${LANDING_NAME}-colors">
