@@ -38,7 +38,6 @@ export default defineConfig({
       reloadOnPartialChange: true,
       partialDirectory: resolve(__dirname, './src', LANDING_NAME),
       context: {
-        dist: 'public/common/img/uploaded/products',
         colors: availableColors,
       },
     }),
