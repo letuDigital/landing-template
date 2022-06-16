@@ -1,0 +1,14 @@
+logs
+*.log
+build
+node_modules/
+.env
+.vscode
+.idea
+.DS_Store
+public/dist/
+public/common/img/uploaded/products/*
+output/*.zip
+index.html
+src/*
+!src/.gitkeep
