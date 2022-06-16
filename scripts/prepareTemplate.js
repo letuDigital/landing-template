@@ -5,6 +5,7 @@ const downloadFile = require('./downloadFile');
 const { writeFile } = require('fs');
 const prepareHtmlTemplate = require('./prepareHtmlTemplate');
 const checkVersion = require('./checkVersion');
+const createWorkingFiles = require('./createWorkingFiles');
 
 const stylesRegex = /<link rel="stylesheet" href="(.*?)"/gm;
 
@@ -21,7 +22,7 @@ axios({
     'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
   },
 })
-  .then(({ data, status }) => {
+  .then(({ data }) => {
     if (!data) {
       return;
     }
@@ -35,14 +36,14 @@ axios({
       }
       const cssFile = match[1];
 
-      downloadFile(`https://www.letu.ru${cssFile}`, resolve(`../public${cssFile}`)).then(() => {
+      downloadFile(`https://www.letu.ru${cssFile}`, resolve(__dirname, `../public${cssFile}`)).then(() => {
         log(`файл сохранён: /public${cssFile}`);
       });
     }
 
     const htmlData = prepareHtmlTemplate(data);
 
-    writeFile(resolve(`../index.html`), htmlData, (error) => {
+    writeFile(resolve(__dirname, `../index.html`), htmlData, (error) => {
       if (error) {
         throw error;
       }
@@ -58,4 +59,14 @@ axios({
     log('---------------------------');
     log('Подготовка данных завершена');
     log('---------------------------');
+  });
+
+createWorkingFiles()
+  .then(() => {
+    log('---------------------------');
+    log('   Рабочие файлы созданы!');
+    log('---------------------------');
+  })
+  .catch((err) => {
+    log(err.message);
   });

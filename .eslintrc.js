@@ -1,6 +1,6 @@
 module.exports = {
   parserOptions: {
-    ecmaVersion: 8,
+    ecmaVersion: 11,
     sourceType: 'module',
     allowImportExportEverywhere: true,
   },
@@ -33,5 +33,5 @@ module.exports = {
     'no-unsafe-optional-chaining': 'error',
     'no-debugger': 'error',
     'no-nested-ternary': 'error',
-  }
+  },
 };

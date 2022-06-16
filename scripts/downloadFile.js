@@ -2,6 +2,12 @@ const axios = require('axios');
 const { createWriteStream, mkdir } = require('fs');
 const { dirname } = require('path');
 
+/**
+ *
+ * @param {string} fileUrl File URL
+ * @param {string} outputLocationPath File destination
+ * @returns {Promise<void>}
+ */
 const downloadFile = async (fileUrl, outputLocationPath) => {
   await mkdir(dirname(outputLocationPath), { recursive: true }, async (err) => {
     if (err) {
